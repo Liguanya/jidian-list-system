@@ -1,0 +1,653 @@
+/* 基础变量 */
+:root {
+    --primary-color: #1a5e63;
+    --primary-dark: #0d3d44;
+    --primary-light: #2a7a82;
+    --accent-color: #4ecdc4;
+    --text-color: #333;
+    --text-light: #666;
+    --white: #fff;
+    --bg-light: #f5f7fa;
+    --shadow: 0 4px 20px rgba(26, 94, 99, 0.15);
+    --shadow-hover: 0 8px 30px rgba(26, 94, 99, 0.25);
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+/* 登录页面样式 */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 50%, var(--primary-light) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-box {
+    width: 420px;
+    padding: 50px 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 25px rgba(26, 94, 99, 0.4);
+}
+
+.logo-icon i {
+    font-size: 36px;
+    color: var(--white);
+}
+
+.login-header h1 {
+    font-size: 22px;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.login-header p {
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.login-form {
+    margin-bottom: 30px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 16px 16px 50px;
+    border: 2px solid #e0e6ed;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: var(--transition);
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 15px;
+    min-height: 20px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    border: none;
+    border-radius: 10px;
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(26, 94, 99, 0.4);
+}
+
+.login-footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #e0e6ed;
+}
+
+.login-footer p {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 5px;
+}
+
+/* 背景动画 */
+.background-animation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.floating-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 20s infinite ease-in-out;
+}
+
+.circle1 {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    right: -100px;
+    animation-delay: 0s;
+}
+
+.circle2 {
+    width: 300px;
+    height: 300px;
+    bottom: -50px;
+    left: -50px;
+    animation-delay: -5s;
+}
+
+.circle3 {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 30%;
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(50px, 50px) rotate(90deg);
+    }
+    50% {
+        transform: translate(0, 100px) rotate(180deg);
+    }
+    75% {
+        transform: translate(-50px, 50px) rotate(270deg);
+    }
+}
+
+/* 主页面样式 */
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 顶部导航 */
+.main-header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--white);
+}
+
+.logo i {
+    font-size: 28px;
+}
+
+.logo span {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 40px;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+}
+
+.main-nav li {
+    padding: 10px 20px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.main-nav li i {
+    font-size: 16px;
+}
+
+.main-nav li:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--white);
+}
+
+.main-nav li.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    font-weight: 500;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--white);
+    font-size: 14px;
+}
+
+.user-info i {
+    font-size: 18px;
+}
+
+.logout-btn {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    color: var(--white);
+    cursor: pointer;
+    font-size: 13px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* 主内容区 */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.content-section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-header {
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e0e6ed;
+}
+
+.section-header h2 {
+    font-size: 28px;
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.section-header h2 i {
+    color: var(--primary-color);
+}
+
+.section-header p {
+    font-size: 15px;
+    color: var(--text-light);
+}
+
+/* 卡片网格 */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card:hover::before {
+    transform: scaleX(1);
+}
+
+.card-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(26, 94, 99, 0.1), rgba(78, 205, 196, 0.1));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+.pipe-icon {
+    position: absolute;
+    font-size: 20px;
+    color: var(--primary-light);
+}
+
+.card h3 {
+    font-size: 18px;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.card p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.card-status {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #f0f0f0;
+    color: var(--text-light);
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.card-status.active {
+    background: rgba(78, 205, 196, 0.15);
+    color: #2a9d8f;
+}
+
+/* 外部链接卡片 */
+.card-external {
+    background: linear-gradient(135deg, var(--white) 0%, rgba(78, 205, 196, 0.05) 100%);
+}
+
+.external-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--accent-color);
+    font-size: 16px;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: var(--transition);
+}
+
+.card-external:hover .external-icon {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 模态框 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--white);
+    padding: 50px 60px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlide 0.3s ease;
+}
+
+@keyframes modalSlide {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(26, 94, 99, 0.1), rgba(78, 205, 196, 0.1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+
+.modal-icon i {
+    font-size: 36px;
+    color: var(--primary-color);
+}
+
+.modal-content h3 {
+    font-size: 22px;
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+}
+
+.modal-content p {
+    font-size: 15px;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.modal-close {
+    padding: 12px 40px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    border: none;
+    border-radius: 8px;
+    color: var(--white);
+    font-size: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(26, 94, 99, 0.3);
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .main-nav {
+        overflow-x: auto;
+        margin: 0 20px;
+    }
+    
+    .main-nav ul {
+        flex-wrap: nowrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .main-nav {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .main-nav ul {
+        justify-content: flex-start;
+        gap: 5px;
+    }
+    
+    .main-nav li {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .main-content {
+        padding: 20px;
+    }
+    
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .login-box {
+        width: 90%;
+        padding: 30px 25px;
+    }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-light);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
