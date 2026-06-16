@@ -1097,6 +1097,7 @@
         function showMainPage() {
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('mainPage').style.display = 'block';
+            document.querySelector('.login-bg').style.display = 'none';
         }
 
         // 退出登录
@@ -1105,6 +1106,7 @@
             localStorage.removeItem('username');
             document.getElementById('loginPage').style.display = 'flex';
             document.getElementById('mainPage').style.display = 'none';
+            document.querySelector('.login-bg').style.display = 'block';
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
             document.getElementById('loginError').textContent = '';
