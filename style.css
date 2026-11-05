@@ -474,25 +474,7 @@ ul { list-style: none; }
     font-size: 12.5px;
     line-height: 1.9;
 }
-.foot-tools {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 14px 0 12px;
-    border-top: 1px solid var(--line);
-}
-.foot-label { color: var(--ink-2); font-weight: 500; }
-.foot-tools a {
-    color: var(--primary);
-    border: 1px solid var(--line);
-    background: #fff;
-    border-radius: 999px;
-    padding: 5px 13px;
-    transition: var(--tr);
-}
-.foot-tools a:hover { background: #f0f8f8; border-color: var(--primary-light); }
-.foot-note { margin-bottom: 4px; }
+.foot-note { padding-top: 14px; border-top: 1px solid var(--line); margin-bottom: 4px; }
 .foot-copy { color: #a9b7bd; }
 
 /* Toast */
