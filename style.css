@@ -198,16 +198,6 @@ ul { list-style: none; }
     80% { transform: translateX(-4px); }
 }
 
-.login-hint {
-    margin-top: 18px;
-    padding-top: 16px;
-    border-top: 1px dashed var(--line);
-    font-size: 13px;
-    color: var(--ink-3);
-    text-align: center;
-}
-.login-hint b { color: var(--primary); font-weight: 600; }
-
 /* ===================== 主界面 ===================== */
 .app {
     min-height: 100vh;

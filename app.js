@@ -5,10 +5,13 @@
 (function () {
     'use strict';
 
-    /* ---------- 账号（前端校验，仅作访问门槛） ---------- */
-    // 密码经 djb2 散列后比对，源码中不出现明文
+    /* ---------- 账号 ----------
+     * 密码以 SHA-256(盐 + ":" + 密码) 校验，源码中既无明文也无弱散列。
+     * 新增一家公司：把「公司名 + 密码」发我，我生成 salt / hash 后在此加一行：
+     *   { user: '公司账号', salt: 'jd-c-2026', hash: '<sha256(salt:密码)>', name: 'XX公司' }
+     */
     var ACCOUNTS = [
-        { user: 'admin', hash: 'ywrfq2', name: '管理员' }
+        { user: 'admin', salt: 'jd-a-2026', hash: 'ccb6cd152b01a77f526cc601ac4fc43f0ab0fedea045d865d91c86380fb61d3a', name: '管理员' }
     ];
 
     var AUTH_KEY = 'jd_auth_v2';
@@ -135,12 +138,22 @@
     var toastEl = document.getElementById('toast');
 
     /* ---------- 工具 ---------- */
-    function hashPwd(str) {
-        var h = 5381;
-        for (var i = 0; i < str.length; i++) {
-            h = ((h << 5) + h + str.charCodeAt(i)) >>> 0;
+    function hexOf(buf) {
+        return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+            return ('0' + b.toString(16)).slice(-2);
+        }).join('');
+    }
+    // SHA-256(salt + ':' + pwd)；浏览器不支持时返回 null
+    function hashPwd(pwd, salt) {
+        if (!(window.crypto && window.crypto.subtle && window.crypto.subtle.digest && window.TextEncoder)) {
+            return Promise.resolve(null);
         }
-        return h.toString(36);
+        try {
+            var data = new TextEncoder().encode(salt + ':' + pwd);
+            return window.crypto.subtle.digest('SHA-256', data).then(hexOf).catch(function () { return null; });
+        } catch (e) {
+            return Promise.resolve(null);
+        }
     }
 
     var toastTimer = null;
@@ -266,32 +279,50 @@
     }
 
     /* ---------- 事件 ---------- */
+    function loginFail(msg) {
+        loginError.textContent = msg;
+        loginError.classList.add('show');
+        var card = document.querySelector('.login-card');
+        if (card) {
+            card.classList.remove('shake');
+            void card.offsetWidth;
+            card.classList.add('shake');
+        }
+        if (passwordInput) {
+            passwordInput.value = '';
+            passwordInput.focus();
+        }
+    }
+
     if (loginForm) {
+        var submitting = false;
         loginForm.addEventListener('submit', function (e) {
             e.preventDefault();
+            if (submitting) return;
             var u = (usernameInput.value || '').trim();
             var p = (passwordInput.value || '').trim();
-            var matched = null;
-            for (var i = 0; i < ACCOUNTS.length; i++) {
-                if (ACCOUNTS[i].user === u && ACCOUNTS[i].hash === hashPwd(p)) { matched = ACCOUNTS[i]; break; }
-            }
-            if (matched) {
-                loginError.classList.remove('show');
-                loginError.textContent = '';
-                saveAuth(matched);
-                showApp(matched);
-            } else {
-                loginError.textContent = u ? '用户名或密码错误，请重试' : '请输入用户名和密码';
-                loginError.classList.add('show');
-                var card = document.querySelector('.login-card');
-                if (card) {
-                    card.classList.remove('shake');
-                    void card.offsetWidth;
-                    card.classList.add('shake');
+            if (!u || !p) { loginFail('请输入用户名和密码'); return; }
+
+            var cand = ACCOUNTS.filter(function (a) { return a.user === u; });
+            if (!cand.length) { loginFail('用户名或密码错误，请重试'); return; }
+
+            submitting = true;
+            hashPwd(p, cand[0].salt).then(function (hv) {
+                submitting = false;
+                if (hv === null) { loginFail('当前环境不支持安全校验，请通过 https 访问本站'); return; }
+                var matched = null;
+                for (var i = 0; i < cand.length; i++) {
+                    if (cand[i].hash === hv) { matched = cand[i]; break; }
                 }
-                passwordInput.value = '';
-                passwordInput.focus();
-            }
+                if (matched) {
+                    loginError.classList.remove('show');
+                    loginError.textContent = '';
+                    saveAuth(matched);
+                    showApp(matched);
+                } else {
+                    loginFail('用户名或密码错误，请重试');
+                }
+            });
         });
     }
 
