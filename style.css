@@ -521,3 +521,16 @@ ul { list-style: none; }
     .login-card { padding: 28px 20px 22px; }
     .card .desc { min-height: 0; }
 }
+
+/* ===== 平台内嵌页（iframe） ===== */
+.frame-layer{position:fixed;inset:0;z-index:900;background:#f4f7f6;display:none;flex-direction:column}
+.frame-layer.show{display:flex}
+.frame-bar{height:52px;flex:0 0 52px;display:flex;align-items:center;gap:14px;padding:0 18px;
+  background:#0f5c4d;color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.frame-back{background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:8px;padding:7px 14px;
+  font-size:13px;cursor:pointer;transition:background .18s}
+.frame-back:hover{background:rgba(255,255,255,.26)}
+.frame-name{flex:1;font-size:14px;font-weight:600;letter-spacing:.5px}
+.frame-open{color:#c9f2e6;font-size:12.5px;text-decoration:none}
+.frame-open:hover{text-decoration:underline}
+.frame-layer iframe{flex:1;width:100%;border:0;background:#fff}

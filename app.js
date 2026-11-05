@@ -209,12 +209,33 @@
                 var url = card.getAttribute('data-url');
                 var name = card.getAttribute('data-name');
                 if (url) {
-                    window.open(url, '_blank', 'noopener');
+                    openFrame(url, name);
                 } else {
                     toast('「' + name + '」正在搭建中，上线后会自动出现在这里');
                 }
             });
         });
+    }
+
+    /* ---------- 平台内嵌打开 ---------- */
+    function openFrame(url, name) {
+        var layer = document.getElementById('frameLayer');
+        var body = document.getElementById('frameBody');
+        var nm = document.getElementById('frameName');
+        var op = document.getElementById('frameOpen');
+        if (!layer || !body) { window.open(url, '_blank', 'noopener'); return; }
+        nm.textContent = name || '专业组价系统';
+        op.href = url;
+        body.src = url;
+        layer.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeFrame() {
+        var layer = document.getElementById('frameLayer');
+        var body = document.getElementById('frameBody');
+        if (layer) layer.classList.remove('show');
+        if (body) body.src = 'about:blank';
+        document.body.style.overflow = '';
     }
 
     /* ---------- 板块切换 ---------- */
@@ -341,6 +362,13 @@
             switchBoard(btn.getAttribute('data-board'));
         });
     }
+
+    /* ---------- 内嵌页返回 ---------- */
+    var _frameBack = document.getElementById('frameBack');
+    if (_frameBack) _frameBack.addEventListener('click', closeFrame);
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeFrame();
+    });
 
     /* ---------- 启动 ---------- */
     var auth = readAuth();
