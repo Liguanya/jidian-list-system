@@ -70,10 +70,10 @@
                 name: '智能化智能组价平台',
                 icon: '🛰️',
                 color: '#7b5ea7',
-                desc: '综合布线、安防监控、楼宇自控、会议广播等子系统清单定额自动匹配，正在搭建中。',
-                chips: ['综合布线', '安防 · 门禁', '楼宇自控'],
-                status: 'building',
-                url: ''
+                desc: '交换机、配线架、插座、摄像机、门禁、广播、楼控等 57 类设备自动套清单定额，桥架、配管、配线、光缆按规格档位联动取价。',
+                chips: ['设备 57 类', '桥架 · 配管配线', '规格档位联动'],
+                status: 'online',
+                url: 'https://liguanya.github.io/intelligent-list-quota/'
             }
         ],
         estimate: [
