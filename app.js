@@ -1,6 +1,6 @@
 /* ============================================================
  * 机电专业智能计量计价平台 v2.0
- * 登录校验 + 两大板块（预算 / 估概算）× 五大专业入口
+ * 登录校验 + 三大板块（预算 / 估概算 / 招标文件编制）
  * ============================================================ */
 (function () {
     'use strict';
@@ -24,7 +24,8 @@
         '#3a7bd5': { dark: '#2a5ea8', soft: '#eaf1fc', line: '#d3e2f8', glow: 'rgba(58,123,213,.32)' },
         '#d98b1f': { dark: '#a9690f', soft: '#fdf3e3', line: '#f4e3c4', glow: 'rgba(217,139,31,.32)' },
         '#c0392b': { dark: '#92291e', soft: '#fbeceb', line: '#f3d3cf', glow: 'rgba(192,57,43,.32)' },
-        '#7b5ea7': { dark: '#5d4580', soft: '#f2eefa', line: '#e0d6f0', glow: 'rgba(123,94,167,.32)' }
+        '#7b5ea7': { dark: '#5d4580', soft: '#f2eefa', line: '#e0d6f0', glow: 'rgba(123,94,167,.32)' },
+        '#0d9488': { dark: '#0f766e', soft: '#f0fdfa', line: '#ccfbf1', glow: 'rgba(13,148,136,.32)' }
     };
 
     /* ---------- 平台数据 ---------- */
@@ -122,6 +123,17 @@
                 status: 'building',
                 url: ''
             }
+        ],
+        doc: [
+            {
+                name: '招标文件智能编制系统',
+                icon: '📄',
+                color: '#0d9488',
+                desc: '以固定招标文件模板为底稿，五步录入项目信息、资格评分、规划指标与产品档位，自动生成完整 docx，格式与表格结构原样保留。',
+                chips: ['前附表七组可切换', 'T/S/W/J 档位联动', '离线单文件'],
+                status: 'online',
+                url: 'https://liguanya.github.io/bidding-doc-system/'
+            }
         ]
     };
 
@@ -199,9 +211,9 @@
         }).join('');
 
         if (stat) {
-            stat.innerHTML = boardKey === 'budget'
-                ? '<span class="stat-pill">已上线 <b>' + online + '</b> / 共 ' + list.length + '</span>'
-                : '<span class="stat-pill">建设中 <b>' + (list.length - online) + '</b> / 共 ' + list.length + '</span>';
+            stat.innerHTML = boardKey === 'estimate'
+                ? '<span class="stat-pill">建设中 <b>' + (list.length - online) + '</b> / 共 ' + list.length + '</span>'
+                : '<span class="stat-pill">已上线 <b>' + online + '</b> / 共 ' + list.length + '</span>';
         }
 
         grid.querySelectorAll('.card').forEach(function (card) {
@@ -284,6 +296,7 @@
         if (currentUser) currentUser.textContent = auth.name || auth.user;
         renderBoard('budget');
         renderBoard('estimate');
+        renderBoard('doc');
         var last = 'budget';
         try { last = localStorage.getItem(BOARD_KEY) || 'budget'; } catch (e) {}
         switchBoard(PLATFORMS[last] ? last : 'budget', false);
