@@ -299,7 +299,7 @@
 
   function init() {
     fillProfs($('upProf'), false);
-    fillCats($('upCat'), '', false);
+    fillCats($('upCat'), $('upProf').value, false);   // 默认专业对应的品类直接可用
     fillProfs($('fProf'), true, '全部专业');
     fillCats($('fCat'), '', true);
     bind();
