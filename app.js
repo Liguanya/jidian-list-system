@@ -79,49 +79,49 @@
         ],
         estimate: [
             {
-                name: '给排水估算概算平台',
+                name: '给排水概算组价平台',
                 icon: '🚿',
                 color: '#2b8a9d',
-                desc: '按建筑面积指标或扩大单价法快速生成给排水专业估算、概算书，价格口径与预算板块同源。',
-                chips: ['指标法', '扩大单价法', '估算 · 概算'],
-                status: 'building',
-                url: ''
+                desc: 'A/B/C 三列项目名称与工程量导入，按名称直接套用定额与主材，不套清单编码、不生成项目特征。',
+                chips: ['ABC 三列输入', '定额直接套用', '广联达 · 建经'],
+                status: 'online',
+                url: 'https://liguanya.github.io/plumbing-list-quota/?mode=gs'
             },
             {
-                name: '暖通估算概算平台',
+                name: '暖通概算组价平台',
                 icon: '❄️',
                 color: '#3a7bd5',
-                desc: '按冷热负荷指标、风量指标生成暖通专业估算概算，支持按系统与设备类型分列。',
-                chips: ['负荷指标', '风量指标', '估算 · 概算'],
-                status: 'building',
-                url: ''
+                desc: '风管、制冷设备、水管道、阀门按名称直接套定额，输出纯定额口径，主材价优先信息价。',
+                chips: ['按名称套定额', '无项目特征', '信息价优先'],
+                status: 'online',
+                url: 'https://liguanya.github.io/hvac-list-quota/?mode=gs'
             },
             {
-                name: '电气估算概算平台',
+                name: '电气概算组价平台',
                 icon: '⚡',
                 color: '#d98b1f',
-                desc: '按装机容量、建筑面积指标生成电气专业估算概算，涵盖变配电、动力照明、防雷接地。',
-                chips: ['容量指标', '面积指标', '估算 · 概算'],
-                status: 'building',
-                url: ''
+                desc: '配电箱柜、桥架、配管配线、电缆、灯具按名称直接套定额，广联达导出无清单行、建经导出无清单编码列。',
+                chips: ['无清单行导出', '主材价联动', '双格式'],
+                status: 'online',
+                url: 'https://liguanya.github.io/electric-list-quota/?mode=gs'
             },
             {
-                name: '消防估算概算平台',
+                name: '消防概算组价平台',
                 icon: '🚒',
                 color: '#c0392b',
-                desc: '按建筑面积与消防系统类型生成消防专业估算概算，火灾报警与灭火系统分列计取。',
-                chips: ['报警系统', '灭火系统', '估算 · 概算'],
-                status: 'building',
-                url: ''
+                desc: '消防电与消防水按名称直接套定额，概算口径输出，主材价优先天津市信息价、缺项按市场价。',
+                chips: ['消防电 · 消防水', '无清单编码', '信息价优先'],
+                status: 'online',
+                url: 'https://liguanya.github.io/fire-list-quota/?mode=gs'
             },
             {
-                name: '智能化估算概算平台',
+                name: '智能化概算组价平台',
                 icon: '🛰️',
                 color: '#7b5ea7',
-                desc: '按点位规模与子系统配置生成智能化专业估算概算，支持按系统分项与单方指标。',
-                chips: ['点位规模', '子系统配置', '估算 · 概算'],
-                status: 'building',
-                url: ''
+                desc: '57 类设备与桥架、配管配线按名称直接套定额，概算口径输出，无清单编码与项目特征。',
+                chips: ['设备 57 类', '按名称套定额', '信息价优先'],
+                status: 'online',
+                url: 'https://liguanya.github.io/intelligent-list-quota/?mode=gs'
             }
         ],
         doc: [
@@ -211,9 +211,7 @@
         }).join('');
 
         if (stat) {
-            stat.innerHTML = boardKey === 'estimate'
-                ? '<span class="stat-pill">建设中 <b>' + (list.length - online) + '</b> / 共 ' + list.length + '</span>'
-                : '<span class="stat-pill">已上线 <b>' + online + '</b> / 共 ' + list.length + '</span>';
+            stat.innerHTML = '<span class="stat-pill">已上线 <b>' + online + '</b> / 共 ' + list.length + '</span>';
         }
 
         grid.querySelectorAll('.card').forEach(function (card) {
