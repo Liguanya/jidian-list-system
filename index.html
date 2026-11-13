@@ -77,6 +77,10 @@
             <span class="tab-icon">📊</span>
             <span class="tab-text"><b>概算智能组价</b><em>设计概算 · 直接套定额</em></span>
         </button>
+        <button class="tab" data-board="price" type="button">
+            <span class="tab-icon">🗄️</span>
+            <span class="tab-text"><b>价格数据库</b><em>询价单入库 · 关键词调用</em></span>
+        </button>
         <button class="tab" data-board="doc" type="button">
             <span class="tab-icon">📄</span>
             <span class="tab-text"><b>招标文件编制</b><em>固定模板 · 一键成稿</em></span>
@@ -106,6 +110,17 @@
             <div class="grid" id="grid-estimate"></div>
         </section>
 
+        <section class="board" id="board-price">
+            <div class="board-head">
+                <div class="board-title">
+                    <h2>价格数据库</h2>
+                    <p>汇总各专业询价单，形成企业自有价格库：上传 Excel（A 序号 · B 品牌 · C 项目名称 · D 单价 · F 报价时间）并选择专业与品类即可入库；组价时按「信息价 → 数据库价 → 市场价」优先级取价，采用数据库价时标注品牌来源。</p>
+                </div>
+                <div class="board-stat" id="stat-price"></div>
+            </div>
+            <div class="grid" id="grid-price"></div>
+        </section>
+
         <section class="board" id="board-doc">
             <div class="board-head">
                 <div class="board-title">
@@ -120,7 +135,7 @@
 
     <footer class="foot">
         <p class="foot-note">价格依据：天津市当月造价信息 + 合理市场价格标准　·　清单定额：天津市 2025 清单计价规范　·　全部本地计算，不上传工程数据</p>
-        <p class="foot-copy">造价行业AI赋能平台　v2.7　2026-11</p>
+        <p class="foot-copy">造价行业AI赋能平台　v2.8　2026-11</p>
     </footer>
 </div>
 
@@ -135,6 +150,6 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="app.js?v=20261113a"></script>
+<script src="app.js?v=20261113b"></script>
 </body>
 </html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>价格数据库 · 造价行业AI赋能平台</title>
+<meta name="description" content="造价行业AI赋能平台价格数据库：五大专业19品类询价单上传、关键词调用，与预算/概算十大组价板块价格联动。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <div class="logo">🗄️</div>
+        <div class="brand-text">
+            <h1>价格数据库</h1>
+            <p>五大专业 19 品类 · 询价单上传 · 关键词调用 · 与预算/概算 10 个组价板块价格联动</p>
+        </div>
+    </div>
+    <div class="top-actions">
+        <span class="store-tip" id="storeTip">本地存储</span>
+        <a class="btn-ghost" href="https://liguanya.github.io/jidian-list-system/" target="_blank" rel="noopener">返回平台门户</a>
+    </div>
+</header>
+
+<main class="wrap">
+
+    <!-- 概览 -->
+    <section class="stats" id="stats"></section>
+
+    <!-- 上传 -->
+    <section class="card">
+        <div class="card-head">
+            <h2><span class="idx">①</span>上传询价单</h2>
+            <p>Excel 五列格式：<b>A 序号 · B 品牌 · C 项目名称 · D 单价 · F 报价时间</b>；上传前请先选择对应专业与品类，同名同品牌同品类将按最新报价更新并留存历史价。</p>
+        </div>
+        <div class="upload-grid">
+            <label class="field">
+                <span>专业</span>
+                <select id="upProf"></select>
+            </label>
+            <label class="field">
+                <span>品类</span>
+                <select id="upCat"></select>
+            </label>
+            <label class="field file-field">
+                <span>询价单文件</span>
+                <input type="file" id="upFile" accept=".xlsx,.xls,.csv">
+            </label>
+            <button class="btn-primary" id="upBtn" disabled>解析并导入</button>
+        </div>
+        <div class="msg" id="upMsg"></div>
+        <div class="preview" id="upPreview"></div>
+    </section>
+
+    <!-- 查询 -->
+    <section class="card">
+        <div class="card-head">
+            <h2><span class="idx">②</span>关键词调用</h2>
+            <p>输入项目名称关键词随时调用库内价格；多个关键词用空格分隔（需同时命中），可叠加专业、品类、品牌筛选。</p>
+        </div>
+        <div class="search-row">
+            <input type="text" id="q" placeholder="输入关键词，如：PPR DN50 / 桥架 200*100 / 风机盘管 / 配电箱">
+            <select id="fProf"></select>
+            <select id="fCat"></select>
+            <input type="text" id="fBrand" placeholder="品牌">
+            <select id="sort">
+                <option value="name">按名称排序</option>
+                <option value="price">按单价升序</option>
+                <option value="date">按报价时间</option>
+            </select>
+            <button class="btn-ghost" id="resetBtn">重置</button>
+        </div>
+
+        <div class="toolbar">
+            <span class="count" id="count">共 0 条</span>
+            <div class="tools">
+                <button class="btn-line" id="exportXlsx">导出 Excel</button>
+                <button class="btn-line" id="exportJson">备份 JSON</button>
+                <button class="btn-line" id="importJson">恢复备份</button>
+                <button class="btn-line danger" id="delSel">删除选中</button>
+                <button class="btn-line danger" id="clearAll">清空数据库</button>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table id="list">
+                <thead>
+                    <tr>
+                        <th class="col-ck"><input type="checkbox" id="ckAll"></th>
+                        <th>专业</th>
+                        <th>品类</th>
+                        <th>品牌</th>
+                        <th class="col-name">项目名称</th>
+                        <th class="num">单价</th>
+                        <th>报价时间</th>
+                        <th>更新时间</th>
+                        <th class="col-op">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+            <div class="empty" id="empty">库内暂无数据，请先上传询价单</div>
+        </div>
+    </section>
+
+    <footer class="foot">
+        <p>数据保存在本机浏览器（与门户、组价站同源共享）；换电脑请用「备份 JSON」导出后在新设备「恢复备份」。</p>
+        <p class="foot-ver">价格数据库 v1.0　2026-11</p>
+    </footer>
+</main>
+
+<input type="file" id="jsonFile" accept=".json" hidden>
+
+<script src="js/xlsx.full.min.js"></script>
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -124,6 +124,17 @@
                 url: 'https://liguanya.github.io/intelligent-list-quota/?mode=gs'
             }
         ],
+        price: [
+            {
+                name: '价格数据库',
+                icon: '🗄️',
+                color: '#1a5e63',
+                desc: '五大专业 19 品类询价单上传入库，支持关键词随时调用；与预算、概算 10 个组价板块价格联动，取价优先级：信息价 → 数据库价 → 市场价。',
+                chips: ['19 品类', '询价单上传', '关键词调用', '价格联动'],
+                status: 'online',
+                url: 'https://liguanya.github.io/jidian-list-system/price-db/'
+            }
+        ],
         doc: [
             {
                 name: '招标文件智能编制系统',
@@ -294,6 +305,7 @@
         if (currentUser) currentUser.textContent = auth.name || auth.user;
         renderBoard('budget');
         renderBoard('estimate');
+        renderBoard('price');
         renderBoard('doc');
         var last = 'budget';
         try { last = localStorage.getItem(BOARD_KEY) || 'budget'; } catch (e) {}
