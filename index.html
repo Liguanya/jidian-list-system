@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>造价行业AI赋能平台</title>
-<meta name="description" content="造价行业AI赋能平台：预算智能组价（给排水/暖通/电气/消防/智能化）、概算智能组价（按项目名称直接套定额）、招标文件智能编制，天津2025清单计价规范，全部本地计算。">
+<meta name="description" content="造价行业AI赋能平台：图纸预处理（不规范图纸规范化）、预算智能组价（给排水/暖通/电气/消防/智能化/建筑/结构/装修）、概算智能组价（按项目名称直接套定额）、价格数据库、招标文件智能编制，天津2025清单计价规范，全部本地计算。">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,8 +26,9 @@
             <h1>造价行业AI赋能平台</h1>
             <p class="brand-sub">AI-Empowered Cost Engineering Platform</p>
             <ul class="brand-points">
-                <li><b>预算智能组价</b>　给排水 · 暖通 · 电气 · 消防 · 智能化</li>
-                <li><b>概算智能组价</b>　五大专业设计概算（按名称直接套定额）</li>
+                <li><b>图纸预处理</b>　不规范图纸 → 规范化图纸（可建模）</li>
+                <li><b>预算智能组价</b>　给排水 · 暖通 · 电气 · 消防 · 智能化 · 建筑 · 结构 · 装修</li>
+                <li><b>概算智能组价</b>　八大专业设计概算（按名称直接套定额）</li>
                 <li><b>招标文件编制</b>　固定模板 · 变量填充 · 一键成稿</li>
                 <li>天津市 2025 清单计价规范 · 当月造价信息价 · 全部本地计算</li>
             </ul>
@@ -69,6 +70,10 @@
     </header>
 
     <nav class="tabs" id="tabs">
+        <button class="tab" data-board="prep" type="button">
+            <span class="tab-icon">🧭</span>
+            <span class="tab-text"><b>图纸预处理</b><em>不规范图纸 · 规范化输出</em></span>
+        </button>
         <button class="tab active" data-board="budget" type="button">
             <span class="tab-icon">📐</span>
             <span class="tab-text"><b>预算智能组价</b><em>施工图预算 · 清单组价</em></span>
@@ -88,6 +93,17 @@
     </nav>
 
     <main class="boards">
+        <section class="board" id="board-prep">
+            <div class="board-head">
+                <div class="board-title">
+                    <h2>图纸预处理</h2>
+                    <p>面向建模与算量前的图纸整理：把不规范的施工图（图层混乱、图框不统一、轴网与标注随意、命名无规则）识别并整理为统一标准的规范化图纸，输出可直接导入建模软件的 DWG，减少翻模返工。</p>
+                </div>
+                <div class="board-stat" id="stat-prep"></div>
+            </div>
+            <div class="grid" id="grid-prep"></div>
+        </section>
+
         <section class="board active" id="board-budget">
             <div class="board-head">
                 <div class="board-title">
@@ -135,7 +151,7 @@
 
     <footer class="foot">
         <p class="foot-note">价格依据：天津市当月造价信息 + 合理市场价格标准　·　清单定额：天津市 2025 清单计价规范　·　全部本地计算，不上传工程数据</p>
-        <p class="foot-copy">造价行业AI赋能平台　v2.8　2026-11</p>
+        <p class="foot-copy">造价行业AI赋能平台　v2.9　2026-11</p>
     </footer>
 </div>
 
@@ -150,6 +166,6 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="app.js?v=20261113b"></script>
+<script src="app.js?v=20261125a"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 /* ============================================================
- * 造价行业AI赋能平台 v2.6
- * 登录校验 + 三大板块（预算 / 估概算 / 招标文件编制）
+ * 造价行业AI赋能平台 v2.9
+ * 登录校验 + 五大板块（图纸预处理 / 预算 / 概算 / 价格数据库 / 招标文件编制）
  * ============================================================ */
 (function () {
     'use strict';
@@ -25,11 +25,25 @@
         '#d98b1f': { dark: '#a9690f', soft: '#fdf3e3', line: '#f4e3c4', glow: 'rgba(217,139,31,.32)' },
         '#c0392b': { dark: '#92291e', soft: '#fbeceb', line: '#f3d3cf', glow: 'rgba(192,57,43,.32)' },
         '#7b5ea7': { dark: '#5d4580', soft: '#f2eefa', line: '#e0d6f0', glow: 'rgba(123,94,167,.32)' },
-        '#0d9488': { dark: '#0f766e', soft: '#f0fdfa', line: '#ccfbf1', glow: 'rgba(13,148,136,.32)' }
+        '#0d9488': { dark: '#0f766e', soft: '#f0fdfa', line: '#ccfbf1', glow: 'rgba(13,148,136,.32)' },
+        '#4a7c59': { dark: '#3a6145', soft: '#eef5ef', line: '#d6e7d9', glow: 'rgba(74,124,89,.30)' },
+        '#8a6d3b': { dark: '#6d5429', soft: '#f7f2e8', line: '#e9dfc9', glow: 'rgba(138,109,59,.30)' },
+        '#b0557a': { dark: '#8d3f5f', soft: '#fbeef3', line: '#f2d5e0', glow: 'rgba(176,85,122,.30)' }
     };
 
     /* ---------- 平台数据 ---------- */
     var PLATFORMS = {
+        prep: [
+            {
+                name: '图纸预处理平台',
+                icon: '🧭',
+                color: '#4a7c59',
+                desc: '面向不规范的施工图：识别图层、图框、轴网、标注与命名问题，自动整理为统一图层、统一图框、统一标注样式的规范化图纸，输出可直接用于建模与算量的 DWG。',
+                chips: ['DWG · PDF · 图片', '图层 / 图框规范化', '标注与命名统一', '输出可建模 DWG'],
+                status: 'building',
+                url: ''
+            }
+        ],
         budget: [
             {
                 name: '给排水智能组价平台',
@@ -75,6 +89,33 @@
                 chips: ['设备 57 类', '桥架 · 配管配线', '规格档位联动'],
                 status: 'online',
                 url: 'https://liguanya.github.io/intelligent-list-quota/'
+            },
+            {
+                name: '建筑智能组价平台',
+                icon: '🏛️',
+                color: '#4a7c59',
+                desc: '土方、砌筑、混凝土及钢筋混凝土、屋面防水、保温隔热、门窗、楼地面与装饰面层按项目名称自动匹配清单与定额。',
+                chips: ['土建全品类', '混凝土 · 模板', '装饰面层'],
+                status: 'building',
+                url: ''
+            },
+            {
+                name: '结构智能组价平台',
+                icon: '🏗️',
+                color: '#8a6d3b',
+                desc: '钢筋按规格与等级自动套子目并计取损耗，模板按构件接触面积，钢结构按材质、板厚与吨位分档。',
+                chips: ['钢筋 · 模板', '钢结构分档', '构件识别'],
+                status: 'building',
+                url: ''
+            },
+            {
+                name: '装修智能组价平台',
+                icon: '🎨',
+                color: '#b0557a',
+                desc: '楼地面、墙柱面、天棚、幕墙、隔断与油漆涂料按构造做法逐层套用定额，主材按面层材料取价。',
+                chips: ['构造做法逐层', '幕墙 · 隔断', '面层主材'],
+                status: 'building',
+                url: ''
             }
         ],
         estimate: [
@@ -122,6 +163,33 @@
                 chips: ['设备 57 类', '按名称套定额', '信息价优先'],
                 status: 'online',
                 url: 'https://liguanya.github.io/intelligent-list-quota/?mode=gs'
+            },
+            {
+                name: '建筑概算组价平台',
+                icon: '🏛️',
+                color: '#4a7c59',
+                desc: '按项目名称直接套用土建定额与主材，概算口径输出，不套清单编码与项目特征。',
+                chips: ['按名称套定额', '概算口径', '双格式导出'],
+                status: 'building',
+                url: ''
+            },
+            {
+                name: '结构概算组价平台',
+                icon: '🏗️',
+                color: '#8a6d3b',
+                desc: '钢筋、模板、钢结构按名称与规格直接套定额，主材价优先信息价、缺项按市场价。',
+                chips: ['钢筋 · 模板', '钢结构', '信息价优先'],
+                status: 'building',
+                url: ''
+            },
+            {
+                name: '装修概算组价平台',
+                icon: '🎨',
+                color: '#b0557a',
+                desc: '楼地面、墙柱面、天棚、幕墙按构造做法直接套定额，输出纯定额口径。',
+                chips: ['构造做法', '幕墙 · 隔断', '概算口径'],
+                status: 'building',
+                url: ''
             }
         ],
         price: [
@@ -222,7 +290,9 @@
         }).join('');
 
         if (stat) {
-            stat.innerHTML = '<span class="stat-pill">已上线 <b>' + online + '</b> / 共 ' + list.length + '</span>';
+            stat.innerHTML = boardKey === 'prep'
+                ? '<span class="stat-pill">规划中 · 待搭建</span>'
+                : '<span class="stat-pill">已上线 <b>' + online + '</b> / 共 ' + list.length + '</span>';
         }
 
         grid.querySelectorAll('.card').forEach(function (card) {
@@ -303,6 +373,7 @@
         loginPage.classList.add('hide');
         mainPage.hidden = false;
         if (currentUser) currentUser.textContent = auth.name || auth.user;
+        renderBoard('prep');
         renderBoard('budget');
         renderBoard('estimate');
         renderBoard('price');
